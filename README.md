@@ -3,7 +3,7 @@
  <img width=200px height=200px src="https://imgur.com/qACS8rr.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Set Default Homepage Policy for Edge & Chrome</h3>
+<h3 align="center">Set Default Homepage Policy for Microsoft Edge & Google Chrome</h3>
 
 <div align="center">
 
