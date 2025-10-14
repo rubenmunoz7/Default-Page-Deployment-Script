@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://imgur.com/FVLthD5" alt="Project logo"></a>
+ <img width=200px height=200px src="https://imgur.com/qACS8rr.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Set Default Homepage Policy for Edge & Chrome</h3>
