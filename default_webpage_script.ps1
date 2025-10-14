@@ -20,12 +20,12 @@ $ErrorActionPreference = "Stop" # fail fast that logs errors
 # Ensure correct registry view
 # Gaurentees we write to the 64-bit HKLM path
 if ($env:PROCESSOR_ARCHITECTURE -ne "AMD64" -and [Environment]::Is64BitOperatingSystem) {
-    & "env:WINDIR\Sys\Native\WindowsPowershell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath $PSBoundParameters
+    & "env:WINDIR\sysnative\WindowsPowershell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath $PSBoundParameters
     exit $LASTEXITCODE 
 }
 
 # Helper to write fresh registry
-# Remove the existing value, then recreate it freshregquertyre
+# Remove the existing value, then recreate it 
 function Set-Multistring {
     param([string]$Path,[string]$Name,[string[]]$Values) # Registry key path, value name, array of strings to store
     if (-not (Test-Path $Path)) { New-Item -Path $Path -Force | Out-Null } # make key if missing
@@ -38,6 +38,7 @@ $edge = "HKLM:\SOFTWARE\Policies\Microsoft\Edge"
 if (-not (Test-Path $edge)) { New-Item -Path $edge -Force | Out-Null }
 New-ItemProperty -Path $edge -Name "HomepageLocation"   -PropertyType String -Value $Homepage -Force | Out-Null # The homepage URL used for the home button and policy
 New-ItemProperty -Path $edge -Name "RestoreOnStartup"   -PropertyType DWord  -Value 4 -Force | Out-Null # Open list of URLs
+Remove-ItemProperty -Path $edge -Name "restoreOnStartupURLs" -ErrorAction SilentlyContinue
 New-ItemProperty -Path $edge -Name "RestoreOnStartupURLs" -Value @($Homepage) -PropertyType MultiString -Force | Out-Null
 
 # Show Home button to same URL (edge)   
