@@ -38,11 +38,11 @@ $edge = "HKLM:\SOFTWARE\Policies\Microsoft\Edge"
 if (-not (Test-Path $edge)) { New-Item -Path $edge -Force | Out-Null }
 New-ItemProperty -Path $edge -Name "HomepageLocation"   -PropertyType String -Value $Homepage -Force | Out-Null # The homepage URL used for the home button and policy
 New-ItemProperty -Path $edge -Name "RestoreOnStartup"   -PropertyType DWord  -Value 4 -Force | Out-Null # Open list of URLs
-New-ItemProperty -Path $edge -Name "RestoreOnStartupURLs" -Value @($homepage) -PropertyType DWord
+New-ItemProperty -Path $edge -Name "RestoreOnStartupURLs" -Value @($Homepage) -PropertyType MultiString -Force | Out-Null
 
 # Show Home button to same URL (edge)   
 New-ItemProperty -Path $edge -Name "ShowHomeButton"         -PropertyType DWord -Value 1 -Force | Out-Null  
-New-itemProperty -Path $edge -Name "HomeButtonIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
+New-itemProperty -Path $edge -Name "HomepageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
 
 # Google Chrome Policies
 $chrome = "HKLM:\SOFTWARE\Policies\Google\Chrome"
@@ -54,6 +54,7 @@ Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values @($Homepage)
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "HomePageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
+
 
 
 
