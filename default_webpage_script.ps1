@@ -1,7 +1,7 @@
 # Default Page Deployment Script
 # Ruben Munoz 10/10/2025
 
-# This script will set the default homepage on edge to *https://paginc.com.sharepoint.com/sites/TeaserPage* when the browser is open
+# This script will set the default homepage on edge to *https://paginc.com* when the browser is open
 # Make the browsers run that page on startup (this is policy managed)
 # Have it run as a variable at runtime that way we can set it as anything
 # Intended for PAG homepage
@@ -12,7 +12,7 @@
 
 # Set default homepage for Edge + Chrome (CHANGE URL ONCE GIVEN)
 param(
-    [string]$Homepage = "https://paginc.com.sharepoint.com/sites/TeaserPage"
+    [string]$Homepage = "https://paginc.com"
 )
 
 $ErrorActionPreference = "Stop" # fail fast that logs errors
@@ -25,7 +25,7 @@ if ($env:PROCESSOR_ARCHITECTURE -ne "AMD64" -and [Environment]::Is64BitOperating
 }
 
 # Helper to write fresh registry
-# Remove the existing value, then recreate it fresh
+# Remove the existing value, then recreate it freshregquertyre
 function Set-Multistring {
     param([string]$Path,[string]$Name,[string[]]$Values) # Registry key path, value name, array of strings to store
     if (-not (Test-Path $Path)) { New-Item -Path $Path -Force | Out-Null } # make key if missing
@@ -54,9 +54,3 @@ Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values @($Homepage)
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "HomePageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
-
-
-
-
-
-
