@@ -10,7 +10,7 @@
 
 
 
-# Set default homepage for Edge + Chrome (CHANGE URL ONCE GIVEN)
+# Set default homepage to "https://paginc.com" for Edge + Chrome 
 param(
     [string]$Homepage = "https://paginc.com"
 )
@@ -55,3 +55,4 @@ Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values @($Homepage)
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "HomePageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
+
