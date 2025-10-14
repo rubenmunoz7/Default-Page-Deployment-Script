@@ -38,7 +38,7 @@ The script uses Windows PowerShell to modify **HKLM** registry keys under the **
 
 To apply the policy:
 1. Deploy the PowerShell script to run automatically via policies
-2 The script writes registry policies to:
+2. The script writes registry policies to:
    - `HKLM\SOFTWARE\Policies\Microsoft\Edge`
    - `HKLM\SOFTWARE\Policies\Google\Chrome`
 3. On next launch, both browsers will open to the homepage and display a managed “Home” button.
