@@ -1,4 +1,4 @@
-# Needles Cleanup Script
+# Default Page Deployment Script
 # Ruben Munoz 10/10/2025
 
 # This script will set the default homepage on edge to *insert browser URL here* when the browser is open
@@ -55,4 +55,5 @@ Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values @(Homepage)
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "HomePageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
+
 
