@@ -57,4 +57,3 @@ To apply the policy:
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 - Thanks to **Microsoft** and **Google** for providing detailed documentation on policy registry paths.  
-- Tested and validated via **NinjaOne Policy Automation**.
