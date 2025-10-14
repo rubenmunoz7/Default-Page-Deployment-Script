@@ -20,7 +20,7 @@ $ErrorActionPreference = "Stop" # fail fast that logs errors
 # Ensure correct registry view
 # Gaurentees we write to the 64-bit HKLM path
 if ($env:PROCESSOR_ARCHITECTURE -ne "AMD64" -and [Environment]::Is64BitOperatingSystem) {
-    & "env:WINDIR\sysnative\WindowsPowershell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath $PSBoundParameters
+    & "$env:WINDIR\sysnative\WindowsPowershell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$PSCommandPath" $PSBoundParameters
     exit $LASTEXITCODE 
 }
 
