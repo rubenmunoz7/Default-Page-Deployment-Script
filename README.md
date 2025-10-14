@@ -53,7 +53,6 @@ To apply the policy:
 
 ## ✍️ Authors <a name = "authors"></a>
 - [@RubenMunoz](https://github.com/rubenmunoz7) – Developer & Maintainer  
-
 ---
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
