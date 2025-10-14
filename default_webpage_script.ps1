@@ -1,10 +1,10 @@
 # Default Page Deployment Script
 # Ruben Munoz 10/10/2025
 
-# This script will set the default homepage on edge to *insert browser URL here* when the browser is open
+# This script will set the default homepage on edge to *https://paginc.com.sharepoint.com/sites/TeaserPage* when the browser is open
 # Make the browsers run that page on startup (this is policy managed)
 # Have it run as a variable at runtime that way we can set it as anything
-# Intended for PAG employee homepage, this will be provided later on
+# Intended for PAG homepage
 
 
 
@@ -12,7 +12,7 @@
 
 # Set default homepage for Edge + Chrome (CHANGE URL ONCE GIVEN)
 param(
-    [string]$Homepage = "https://RubenIsAwesome.com"
+    [string]$Homepage = "https://paginc.com.sharepoint.com/sites/TeaserPage"
 )
 
 $ErrorActionPreference = "Stop" # fail fast that logs errors
@@ -55,6 +55,7 @@ Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values @($Homepage)
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "HomePageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
+
 
 
 
