@@ -7,7 +7,7 @@
 
 # Set default homepage for Edge + Chrome (CHANGE URL ONCE GIVEN)
 param(
-    [string]$Homepage = "INSERTURLHERE",    # Main homepage   
+    [string]$Homepage = "INSERTURLHERE.com",    # Main homepage   
     [string[]]$AdditionalStartupURLs = @()       # open extra tab on launch
 )
 
@@ -54,3 +54,4 @@ Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values $StartupURLs 
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "HomePageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
+
