@@ -27,7 +27,7 @@ Designed for automation platforms such as NinjaOne.
 ---
 
 ## 🧐 About <a name = "about"></a>
-This project enforces a consistent homepage across all devices within PAG by using registry-based browser policies for both Microsoft Edge and Google Chrome.  
+This project enforces a consistent homepage across all devices within the policy by using registry-based browser policies for both Microsoft Edge and Google Chrome.  
 It ensures that both Microsoft Edge and Google Chrome open to a specified homepage on startup and display a Home button that leads to the same page.  
 
 The script uses Windows PowerShell to modify **HKLM** registry keys under the **Policies** path, which applies settings to all of the users on that machine. When deployed through automation such as **NinjaOne**, it runs as `SYSTEM` and guarantees the changers once a user logs in. 
