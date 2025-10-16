@@ -1,25 +1,20 @@
 # Default Page Deployment Script
 # Ruben Munoz 10/10/2025
 
-# This script will set the default homepage on edge to *https://paginc.com* when the browser is open
+# This script will set the default homepage on edge to *INSERTURLHERE* when the browser is open
 # Make the browsers run that page on startup (this is policy managed)
 # Have it run as a variable at runtime that way we can set it as anything
-# Intended for PAG homepage
-
-
-
-
 
 # Set default homepage for Edge + Chrome (CHANGE URL ONCE GIVEN)
 param(
-    [string]$Homepage = "https://paginc.com"    # Main homepage
-    [string[]]$AdditionalStartupURLs = @()      # open extra tab on launch
+    [string]$Homepage = "INSERTURLHERE",    # Main homepage   
+    [string[]]$AdditionalStartupURLs = @()       # open extra tab on launch
 )
 
-$ErrorActionPreference = "Stop" # fail fast that logs errors
+$ErrorActionPreference = "Stop" # fail fast 
 
 # Ensure correct registry view
-# Gaurentees we write to the 64-bit HKLM path
+# Gaurantees we write to the 64-bit HKLM path
 if ($env:PROCESSOR_ARCHITECTURE -ne "AMD64" -and [Environment]::Is64BitOperatingSystem) {
     & "$env:WINDIR\sysnative\WindowsPowershell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$PSCommandPath" $PSBoundParameters
     exit $LASTEXITCODE 
@@ -43,7 +38,7 @@ if (-not (Test-Path $edge)) { New-Item -Path $edge -Force | Out-Null }
 
 New-ItemProperty -Path $edge -Name "HomepageLocation"   -PropertyType String -Value $Homepage -Force | Out-Null # The homepage URL used for the home button and policy
 New-ItemProperty -Path $edge -Name "RestoreOnStartup"   -PropertyType DWord  -Value 4 -Force | Out-Null # Open list of URLs
-Set-MultiString -Path $edge -Name "RestoreOnStartupURLs" -Value @($Homepage) -PropertyType MultiString -Force | Out-Null
+Set-Multistring -Path $edge -Name "RestoreOnStartupURLs" -Values $StartupURLs   #  use full list
 
 # Show Home button to same URL (edge)   
 New-ItemProperty -Path $edge -Name "ShowHomeButton"         -PropertyType DWord -Value 1 -Force | Out-Null  
@@ -54,7 +49,7 @@ $chrome = "HKLM:\SOFTWARE\Policies\Google\Chrome"
 if (-not (Test-Path $chrome)) { New-Item -Path $chrome -Force | Out-Null } # ensure that key exists
 New-ItemProperty -Path $chrome -Name "Homepagelocation"     -PropertyType String -Value $Homepage -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "RestoreOnStartup"     -PropertyType DWord -Value 4 -Force | Out-Null
-Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values @($Homepage)
+Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values $StartupURLs   # use full list
 
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
