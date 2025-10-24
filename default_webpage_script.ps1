@@ -7,9 +7,9 @@
 
 # Set default homepage for Edge + Chrome (CHANGE URL ONCE GIVEN)
 param(
-    [string]$Homepage = "INSERTURLHERE.com",    # Main homepage   
-    [string[]]$AdditionalStartupURLs = @(INSERTURLHERE.com)       # open extra tab on launch
-)
+    [string]$Homepage = "INSERTURLHERE.COM",    # Main homepage   
+    [string[]]$AdditionalStartupURLs = @(INSERTURLHERE.COM)       # open extra tab on launch
+)   
 
 $ErrorActionPreference = "Stop" # fail fast 
 
@@ -31,6 +31,7 @@ function Set-Multistring {
 
 # Build tab list (first tab = URL)
 $StartupURLs = @($Homepage) + @($AdditionalStartupURLs | Where-Object { $_ -and $_.Trim() -ne "" })
+$NewTabPageURL = "https://www.example.com" # NewTabPage URL (INSERT HERE)
 
 # Microsoft Edge Policies
 $edge = "HKLM:\SOFTWARE\Policies\Microsoft\Edge"
@@ -44,6 +45,9 @@ Set-Multistring -Path $edge -Name "RestoreOnStartupURLs" -Values $StartupURLs   
 New-ItemProperty -Path $edge -Name "ShowHomeButton"         -PropertyType DWord -Value 1 -Force | Out-Null  
 New-itemProperty -Path $edge -Name "HomepageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
 
+# NewTabPage location policy
+Set-ItemProperty -Path $RegistryPath -Name "NewTabPageLocation" -Value $NewTabPageURL
+
 # Google Chrome Policies
 $chrome = "HKLM:\SOFTWARE\Policies\Google\Chrome"
 if (-not (Test-Path $chrome)) { New-Item -Path $chrome -Force | Out-Null } # ensure that key exists
@@ -54,5 +58,3 @@ Set-Multistring -Path $chrome -Name "RestoreOnStartupURLs" -Values $StartupURLs 
 # Show Home Button to same URL (chrome)
 New-ItemProperty -Path $chrome -Name "ShowHomeButton"       -PropertyType DWord -Value 1 -Force | Out-Null
 New-ItemProperty -Path $chrome -Name "HomePageIsNewTabPage" -PropertyType DWord -Value 0 -Force | Out-Null
-
-
